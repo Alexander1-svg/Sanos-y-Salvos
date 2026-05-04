@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Frontend (Next.js)
+  frontend:
+    build: .
+    container_name: msvc-frontend
+    ports:
+      - "3000:3000"
+
+  # Microservicio 1: Gestión de Mascotas
+  gestion-mascotas:
+    build: ./ms-gestion-mascotas
+    container_name: msvc-gestion-mascotas
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+
+  # Microservicio 2: Geolocalización
+  geolocalizacion:
+    build: ./ms-geolocalizacion
+    container_name: msvc-geolocalizacion
+    ports:
+      - "8082:8081"
+    depends_on:
+      - mongodb
+
+  # Microservicio 3: Motor de Coincidencias
+  motor-coincidencias:
+    build: ./ms-motor-coincidencias
+    container_name: msvc-motor-coincidencias
+    ports:
+      - "8083:8081"
+    depends_on:
+      - mongodb
+
+  # Base de Datos MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: msvc-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
