@@ -1,64 +1,76 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-zinc-50 dark:bg-zinc-950 overflow-hidden">
+
+      {/* Fondo decorativo */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-32 -left-32 h-[500px] w-[500px] rounded-full bg-amber-100/60 blur-3xl dark:bg-amber-900/20" />
+        <div className="absolute -bottom-32 -right-32 h-[400px] w-[400px] rounded-full bg-zinc-200/80 blur-3xl dark:bg-zinc-800/40" />
+        {/* Grid sutil */}
+        <div
+          className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+      </div>
+
+      <main className="relative z-10 flex w-full max-w-2xl flex-col items-center gap-12 px-6 py-20 text-center">
+
+        {/* Logo / Marca */}
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-5xl">🐾</span>
+          <h1 className="font-serif text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl">
+            PetAlert
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-base text-zinc-500 dark:text-zinc-400">
+            Porque cada mascota merece volver a casa.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        {/* Card principal */}
+        <Link
+          href="/reportar"
+          className="group relative w-full max-w-md overflow-hidden rounded-3xl border border-amber-200 bg-white shadow-lg shadow-amber-100/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-200/60 dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-none dark:hover:border-amber-500/40"
+        >
+          {/* Acento superior */}
+          <div className="h-1.5 w-full bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500" />
+
+          <div className="flex flex-col items-center gap-5 px-8 py-10">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-50 text-3xl shadow-inner dark:bg-zinc-800">
+              🔍
+            </div>
+            <div className="flex flex-col gap-2">
+              <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
+                Reportar mascota perdida
+              </h2>
+              <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                Completa el formulario con los datos del dueño y de tu mascota.
+                Te ayudaremos a difundir el aviso.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-200 group-hover:bg-amber-500 group-hover:shadow-amber-300/50">
+              Comenzar reporte
+              <svg
+                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </div>
+        </Link>
+
+        {/* Pie de página */}
+        <p className="text-xs text-zinc-400 dark:text-zinc-600">
+          Servicio gratuito · Sin registro requerido
+        </p>
       </main>
     </div>
   );
