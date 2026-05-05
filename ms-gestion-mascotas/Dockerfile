@@ -1,4 +1,7 @@
-FROM eclipse-temurin:17-jdk-jammy
+FROM node:20-alpine
 WORKDIR /app
-EXPOSE 8081
-CMD ["sh", "-c", "echo El microservicio esta listo para recibir el codigo Java && tail -f /dev/null"]
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3001
+CMD ["node", "index.js"]

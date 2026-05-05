@@ -1,39 +1,35 @@
 version: '3.8'
 
 services:
-  # Microservicio 1: Gestión de Mascotas
-  gestion-mascotas:
-    build: ./ms-gestion-mascotas
-    container_name: msvc-gestion-mascotas
-    ports:
-      - "8081:8081"
-    depends_on:
-      - mongodb
-
-  # Microservicio 2: Geolocalización
-  geolocalizacion:
-    build: ./ms-geolocalizacion
-    container_name: msvc-geolocalizacion
-    ports:
-      - "8082:8082"
-    depends_on:
-      - mongodb
-
-  # Microservicio 3: Motor de Coincidencias
-  motor-coincidencias:
-    build: ./ms-motor-coincidencias
-    container_name: msvc-motor-coincidencias
-    ports:
-      - "8083:8083"
-    depends_on:
-      - mongodb
-
-  # Base de Datos MongoDB
-  mongodb:
-    image: mongo:latest
-    container_name: msvc-mongodb
+  mongo:
+    image: mongo:7.0
     ports:
       - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: sanosysalvos
+    volumes:
+      - mongo_data:/data/db
+
+  ms-gestion-mascotas:
+    build: ./ms-gestion-mascotas
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+
+  ms-geolocalizacion:
+    build: ./ms-geolocalizacion
+    ports:
+      - "3002:3002"
+
+  ms-motor-coincidencias:
+    build: ./ms-motor-coincidencias
+    ports:
+      - "3003:3003"
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
