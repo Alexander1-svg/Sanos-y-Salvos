@@ -1,13 +1,6 @@
 version: '3.8'
 
 services:
-  # Frontend (Next.js)
-  frontend:
-    build: .
-    container_name: msvc-frontend
-    ports:
-      - "3000:3000"
-
   # Microservicio 1: Gestión de Mascotas
   gestion-mascotas:
     build: ./ms-gestion-mascotas
@@ -22,7 +15,7 @@ services:
     build: ./ms-geolocalizacion
     container_name: msvc-geolocalizacion
     ports:
-      - "8082:8081"
+      - "8082:8082"
     depends_on:
       - mongodb
 
@@ -31,7 +24,7 @@ services:
     build: ./ms-motor-coincidencias
     container_name: msvc-motor-coincidencias
     ports:
-      - "8083:8081"
+      - "8083:8083"
     depends_on:
       - mongodb
 
