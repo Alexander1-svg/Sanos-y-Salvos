@@ -1,8 +1,10 @@
 version: '3.8'
 
 services:
+  # Base de datos local para desarrollo y tests
   mongo:
     image: mongo:7.0
+    container_name: msvc-mongodb
     ports:
       - "27017:27017"
     environment:
@@ -14,20 +16,27 @@ services:
 
   ms-gestion-mascotas:
     build: ./ms-gestion-mascotas
+    container_name: msvc-gestion-mascotas
     ports:
       - "3001:3001"
+    environment:
+      - MONGODB_URI=mongodb://admin:password123@mongo:27017/sanosysalvos?authSource=admin
     depends_on:
       - mongo
 
   ms-geolocalizacion:
     build: ./ms-geolocalizacion
+    container_name: msvc-geolocalizacion
     ports:
       - "3002:3002"
 
   ms-motor-coincidencias:
     build: ./ms-motor-coincidencias
+    container_name: msvc-motor-coincidencias
     ports:
       - "3003:3003"
+    environment:
+      - MONGODB_URI=mongodb://admin:password123@mongo:27017/sanosysalvos?authSource=admin
     depends_on:
       - mongo
 
