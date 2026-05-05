@@ -84,4 +84,5 @@ app.patch('/reportes/:id/encontrado', async (req, res) => {
   }
 });
 
-app.listen(3001, () => console.log("ms-gestion-mascotas corriendo en puerto 3001"));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`ms-gestion-mascotas corriendo en puerto ${PORT}`));
