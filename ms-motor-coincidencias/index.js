@@ -30,4 +30,5 @@ app.get('/coincidencias', async (req, res) => {
   }
 });
 
-app.listen(3003, () => console.log("ms-motor-coincidencias corriendo en puerto 3003"));
+const PORT = process.env.PORT || 3003;
+app.listen(PORT, () => console.log(`ms-motor-coincidencias corriendo en puerto ${PORT}`));
