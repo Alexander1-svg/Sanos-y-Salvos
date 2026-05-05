@@ -70,4 +70,5 @@ app.get('/reverse', async (req, res) => {
   }
 });
 
-app.listen(3002, () => console.log("ms-geolocalizacion corriendo en puerto 3002"));
+const PORT = process.env.PORT || 3002;
+app.listen(PORT, () => console.log(`ms-geolocalizacion corriendo en puerto ${PORT}`));
