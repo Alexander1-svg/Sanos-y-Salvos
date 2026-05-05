@@ -12,7 +12,7 @@ El sistema se basa en un patrón de Microservicios, lo que permite que cada mód
 
 ---
 
-### Estrategia de Desarrollo y Arquetipos:
+## Estrategia de Desarrollo y Arquetipos:
 El proyecto se gestiona bajo los siguientes estándares:
 
 **Nuestro Arquetipo:** Se definió un Arquetipo de Software basado en Node.js y Express para el backend:
