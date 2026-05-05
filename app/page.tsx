@@ -14,7 +14,7 @@ const MapaPerdida = dynamic(() => import("@/components/MapaPerdida"), {
 });
 
 // ─── URLs de microservicios ───────────────────────────────────────────────────
-const API_MASCOTAS = "http://localhost:3001";
+const API_MASCOTAS = "https://sanos-y-salvos-gestion-mascotas.onrender.com";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface OwnerForm {
