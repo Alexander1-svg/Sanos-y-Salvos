@@ -20,7 +20,7 @@ services:
     ports:
       - "3001:3001"
     environment:
-      - MONGODB_URI=mongodb://admin:password123@mongo:27017/sanosysalvos?authSource=admin
+      - MONGODB_URI=mongodb://admin:password123@mongo:27017/sanosysalvos_db?authSource=admin
     depends_on:
       - mongo
 

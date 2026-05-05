@@ -123,6 +123,9 @@ export default function SanosYSalvosPage() {
         ...ownerForm,
         ...petForm,
         fechaPerdida: new Date(petForm.fechaPerdida).toISOString(),
+        coordenadas: petForm.coordenadas.lat && petForm.coordenadas.lng
+          ? { lat: petForm.coordenadas.lat, lng: petForm.coordenadas.lng }
+          : undefined,
       };
 
       const res = await fetch(`${API_MASCOTAS}/reportes`, {
@@ -137,8 +140,9 @@ export default function SanosYSalvosPage() {
       }
 
       setSubmitted(true);
-    } catch (err: any) {
-      setError(err.message || "Error de conexión con el servidor");
+    } catch (err) {
+      const mensaje = err instanceof Error ? err.message : "Error de conexión con el servidor";
+      setError(mensaje);
     } finally {
       setEnviando(false);
     }
