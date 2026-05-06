@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const MONGODB_URI = "mongodb://admin:password123@mongo:27017/sanosysalvos?authSource=admin";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://admin:password123@mongo:27017/sanosysalvos_db?authSource=admin";
 
 mongoose.connect(MONGODB_URI)
   .then(() => console.log("Motor coincidencias conectado a MongoDB"))
