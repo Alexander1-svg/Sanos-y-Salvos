@@ -31,7 +31,7 @@ function ClickHandler({ onClic }: { onClic: (coords: Coordenadas) => void }) {
   return null;
 }
 
-const GEO_API = "http://localhost:3002";
+const GEO_API = "https://sanos-y-salvos-geolocalizacion.onrender.com";
 
 export default function MapaPerdida({ onUbicacionSeleccionada }: Props) {
   const [marcador, setMarcador] = useState<Coordenadas | null>(null);
