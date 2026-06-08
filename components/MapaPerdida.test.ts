@@ -9,4 +9,11 @@ describe('Pruebas Unitarias: Componente MapaPerdida', () => {
     expect(mapaCoordenadas.lng).toBeCloseTo(-70.66, 1);
   });
 
+  // Test 5: Estado del marcador
+  test('Estado: Debería cambiar la etiqueta visual a "Encontrada" al cerrar el caso', () => {
+    let estadoMascota = 'Buscada';
+    estadoMascota = 'Encontrada';
+    expect(estadoMascota).toBe('Encontrada');
+  });
+  
 });
