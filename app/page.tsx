@@ -16,19 +16,22 @@ function StatCard({ value, label }: { value: string; label: string }) {
 }
 
 export default function SanosYSalvosPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted]       = useState(false);
   const [nombreMascota, setNombreMascota] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail]               = useState("");
+  const [reporteId, setReporteId]       = useState(""); // ← nuevo
 
   if (submitted) {
     return (
       <SuccessScreen
         nombreMascota={nombreMascota}
         email={email}
+        reporteId={reporteId}
         onReset={() => {
           setSubmitted(false);
           setNombreMascota("");
           setEmail("");
+          setReporteId("");
         }}
       />
     );
@@ -74,8 +77,8 @@ export default function SanosYSalvosPage() {
                 <div className="text-6xl mb-4 text-center">🐕 🐈 🐇</div>
                 <div className="grid grid-cols-3 divide-x divide-stone-200">
                   <StatCard value="1.2k+" label="Mascotas reencontradas" />
-                  <StatCard value="850+" label="Voluntarios activos" />
-                  <StatCard value="98%" label="Tasa de éxito" />
+                  <StatCard value="850+"  label="Voluntarios activos" />
+                  <StatCard value="98%"   label="Tasa de éxito" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -104,9 +107,9 @@ export default function SanosYSalvosPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-col md:flex-row gap-8 items-stretch">
             {[
-              { n: "01", icon: "📝", title: "Reporta", desc: "Completa el formulario con los datos del dueño y de la mascota perdida." },
+              { n: "01", icon: "📝", title: "Reporta",   desc: "Completa el formulario con los datos del dueño y de la mascota perdida." },
               { n: "02", icon: "📡", title: "Difundimos", desc: "Activamos nuestra red de voluntarios y publicamos en redes sociales." },
-              { n: "03", icon: "🤝", title: "Reunimos", desc: "Coordinamos el reencuentro seguro de tu mascota con su familia." },
+              { n: "03", icon: "🤝", title: "Reunimos",   desc: "Coordinamos el reencuentro seguro de tu mascota con su familia." },
             ].map((step) => (
               <div key={step.n} className="flex-1 relative rounded-2xl bg-white border border-stone-200 p-8 flex flex-col gap-4 shadow-sm">
                 <span className="font-display text-5xl font-black text-stone-100 absolute top-4 right-6 select-none">{step.n}</span>
@@ -144,9 +147,9 @@ export default function SanosYSalvosPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: "🐕", title: "Perros", num: "780+", color: "bg-amber-50 border-amber-100" },
-                { icon: "🐈", title: "Gatos", num: "340+", color: "bg-orange-50 border-orange-100" },
-                { icon: "🐇", title: "Otros animales", num: "80+", color: "bg-sky-50 border-sky-100" },
+                { icon: "🐕", title: "Perros",          num: "780+", color: "bg-amber-50 border-amber-100" },
+                { icon: "🐈", title: "Gatos",           num: "340+", color: "bg-orange-50 border-orange-100" },
+                { icon: "🐇", title: "Otros animales",  num: "80+",  color: "bg-sky-50 border-sky-100" },
                 { icon: "❤️", title: "Familias felices", num: "1.2k+", color: "bg-rose-50 border-rose-100" },
               ].map((item) => (
                 <div key={item.title} className={`rounded-2xl border ${item.color} p-6 flex flex-col gap-2`}>
@@ -160,11 +163,14 @@ export default function SanosYSalvosPage() {
         </div>
       </section>
 
-      <ReportForm onSubmitted={(nombreMascota, email) => {
-        setNombreMascota(nombreMascota);
-        setEmail(email);
-        setSubmitted(true);
-      }} />
+      <ReportForm
+        onSubmitted={(nombre, correo, id) => {
+          setNombreMascota(nombre);
+          setEmail(correo);
+          setReporteId(id);
+          setSubmitted(true);
+        }}
+      />
 
       <Footer />
     </div>

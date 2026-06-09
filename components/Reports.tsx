@@ -52,7 +52,7 @@ function Field({ label, required, children }: { label: string; required?: boolea
 }
 
 interface ReportFormProps {
-  onSubmitted: (nombreMascota: string, email: string) => void;
+  onSubmitted: (nombreMascota: string, email: string, reporteId: string) => void;
 }
 
 export default function ReportForm({ onSubmitted }: ReportFormProps) {
@@ -97,11 +97,19 @@ export default function ReportForm({ onSubmitted }: ReportFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
+      // Parsear el body UNA sola vez — si se llama res.json() dos veces el body ya está consumido
+      const data = await res.json();
+
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "Error al enviar el reporte");
+        throw new Error(data?.error || `Error ${res.status} al enviar el reporte`);
       }
-      onSubmitted(petForm.nombreMascota, ownerForm.email);
+
+      if (!data._id) {
+        throw new Error("El servidor no devolvió el ID del reporte.");
+      }
+
+      onSubmitted(petForm.nombreMascota, ownerForm.email, data._id as string);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error de conexión con el servidor");
     } finally {
