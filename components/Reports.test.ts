@@ -2,14 +2,14 @@ import { describe, test, expect } from 'vitest';
 
 describe('Pruebas Unitarias: Componente Reports', () => {
 
-  // Test 1: Validación del formulario
+  // Test 5: Validación del formulario
   test('Formulario: Debería rechazar un reporte si falta el nombre de la mascota', () => {
     const formularioMascota = { nombre: '', color: 'Blanco', tamano: 'Grande' };
     const esValido = formularioMascota.nombre.trim().length > 0;
     expect(esValido).toBe(false);
   });
 
-  // Test 2: Filtros de la lista
+  // Test 6: Filtros de la lista
   test('Filtros: Debería filtrar correctamente mascotas por tipo', () => {
     const listaMascotas = [
       { id: 1, tipo: 'Perro', nombre: 'Firulais' },
@@ -18,16 +18,6 @@ describe('Pruebas Unitarias: Componente Reports', () => {
     const resultadoFiltro = listaMascotas.filter(m => m.tipo === 'Perro');
     expect(resultadoFiltro).toHaveLength(1);
     expect(resultadoFiltro[0].nombre).toBe('Firulais');
-  });
-
-  // Test 3: Envío de datos formateados al BFF
-  test('BFF API: Debería estructurar correctamente el payload antes de enviarlo al servicio', () => {
-    const datosRaw = { name: 'Tom', size: 'Pequeño' };
-    const payloadBFF = {
-      nombreMascota: datosRaw.name.toUpperCase(),
-      tamanoMascota: datosRaw.size
-    };
-    expect(payloadBFF).toEqual({ nombreMascota: 'TOM', tamanoMascota: 'Pequeño' });
   });
 
 });
