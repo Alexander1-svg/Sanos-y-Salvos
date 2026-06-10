@@ -22,7 +22,7 @@ El sistema se basa en un patrón de Microservicios, lo que permite que cada mód
 ---
 
 ## Configuración de Variables de Entorno
-Cree un archivo `.env.local` en la raíz del proyecto:
+Cree un archivo `.env` en la raíz del proyecto:
 
 ```env
 NEXT_PUBLIC_MS_GESTION=https://sanos-y-salvos-gestion-mascotas.onrender.com
