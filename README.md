@@ -30,9 +30,6 @@ NEXT_PUBLIC_MS_GEO=https://sanos-y-salvos-geolocalizacion.onrender.com
 NEXT_PUBLIC_MS_MOTOR=https://sanos-y-salvos-motor-coincidencias.onrender.com
 ```
 
-> ⚠️ El microservicio de motor de coincidencias (`NEXT_PUBLIC_MS_MOTOR`) está pendiente de integrar en el frontend.
----
-
 ## Estructura del Repositorio
 - `/app`: Páginas y rutas del Frontend (Next.js)
 - `/components/Layout`: Navbar y Footer reutilizables
