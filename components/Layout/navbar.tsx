@@ -1,4 +1,10 @@
 {/* ── Navbar ── */}
+/**
+ * Navbar principal de la aplicación.
+ * Barra de navegación sticky con links a las secciones principales
+ * y un botón de acción para reportar una mascota perdida.
+ * No recibe props.
+ */
 export default function Navbar() {
   return (
       <nav className="sticky top-0 z-50 border-b border-stone-200 bg-white/80 backdrop-blur-md">

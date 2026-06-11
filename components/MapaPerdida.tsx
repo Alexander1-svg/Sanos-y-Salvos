@@ -19,9 +19,18 @@ interface Coordenadas {
 }
 
 interface Props {
+  /** Callback que se ejecuta al seleccionar una ubicación en el mapa,
+   * ya sea por clic directo o por búsqueda de lugar.
+   * Recibe las coordenadas y la dirección en texto.
+   */
   onUbicacionSeleccionada: (coords: Coordenadas, direccion: string) => void;
 }
 
+/**
+ * Maneja los eventos de clic sobre el mapa de Leaflet.
+ * Componente interno que no renderiza nada visible.
+ * @param onClic - Callback que recibe las coordenadas del clic.
+ */
 function ClickHandler({ onClic }: { onClic: (coords: Coordenadas) => void }) {
   useMapEvents({
     click(e) {
@@ -33,6 +42,16 @@ function ClickHandler({ onClic }: { onClic: (coords: Coordenadas) => void }) {
 
 const GEO_API = process.env.NEXT_PUBLIC_MS_GEO;
 
+/**
+ * Mapa interactivo para seleccionar la ubicación donde se perdió la mascota.
+ * Centrado por defecto en Santiago, Chile.
+ * Permite seleccionar ubicación de dos formas:
+ * - Buscando un lugar por nombre (usa el microservicio de geolocalización)
+ * - Haciendo clic directamente en el mapa (geocodificación inversa)
+ *
+ * @param onUbicacionSeleccionada - Callback al seleccionar ubicación,
+ * recibe coordenadas {lat, lng} y dirección en texto.
+ */
 export default function MapaPerdida({ onUbicacionSeleccionada }: Props) {
   const [marcador, setMarcador] = useState<Coordenadas | null>(null);
   const [buscando, setBuscando] = useState(false);

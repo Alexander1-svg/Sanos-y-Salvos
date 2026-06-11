@@ -39,6 +39,12 @@ interface PetForm {
 const inputCls = "w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-800 text-sm placeholder:text-stone-400 focus:border-emerald-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-100 transition-all duration-200";
 const selectCls = "w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-800 text-sm focus:border-emerald-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-100 transition-all duration-200 appearance-none cursor-pointer";
 
+/**
+ * Campo de formulario reutilizable con label y soporte para campo requerido.
+ * @param label - Texto del label visible sobre el input.
+ * @param required - Si es true muestra un asterisco verde junto al label.
+ * @param children - Input, select o textarea que va dentro del campo.
+ */
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
@@ -52,9 +58,21 @@ function Field({ label, required, children }: { label: string; required?: boolea
 }
 
 interface ReportFormProps {
+  /** Callback que se ejecuta al enviar exitosamente el reporte.
+   * Recibe el nombre de la mascota, el email del dueño y el ID del reporte creado.
+   */
   onSubmitted: (nombreMascota: string, email: string, reporteId: string) => void;
 }
 
+/**
+ * Formulario de reporte de mascota perdida en 2 pasos.
+ * Paso 1: datos del dueño (nombre, teléfono, email, comuna, dirección).
+ * Paso 2: datos de la mascota (nombre, especie, color, ubicación en mapa, etc).
+ * Al enviar exitosamente llama a onSubmitted con los datos necesarios para
+ * mostrar el SuccessScreen y consultar el motor de coincidencias.
+ *
+ * @param onSubmitted - Callback al enviar exitosamente.
+ */
 export default function ReportForm({ onSubmitted }: ReportFormProps) {
   const [ownerForm, setOwnerForm] = useState<OwnerForm>({
     nombreDueno: "", telefono: "", email: "", comuna: "", direccion: "",
@@ -80,6 +98,11 @@ export default function ReportForm({ onSubmitted }: ReportFormProps) {
     setPetForm((p) => ({ ...p, coordenadas: coords, lugarPerdida: direccion }));
   };
 
+  /**
+   * Construye el payload con los datos del dueño y la mascota,
+   * lo envía al microservicio de gestión y llama a onSubmitted
+   * con el ID del reporte devuelto por el servidor.
+   */
   const handleSubmit = async () => {
     setEnviando(true);
     setError(null);

@@ -15,10 +15,21 @@ const Coincidencias = dynamic(() => import("@/components/Coincidencias"), {
 interface SuccessScreenProps {
   nombreMascota: string;
   email: string;
-  reporteId: string; // ← nuevo: ID del reporte recién creado
+  /** ID del reporte recién creado, usado para consultar coincidencias en el motor. */
+  reporteId: string;
   onReset: () => void;
 }
 
+/**
+ * Pantalla de confirmación que se muestra tras enviar un reporte exitosamente.
+ * Muestra un mensaje de éxito con el nombre de la mascota y el email del dueño,
+ * y carga el componente de coincidencias para mostrar avistamientos relacionados.
+ *
+ * @param nombreMascota - Nombre de la mascota reportada.
+ * @param email - Email del dueño para contacto.
+ * @param reporteId - ID del reporte creado, necesario para buscar coincidencias.
+ * @param onReset - Callback para volver al formulario y hacer otro reporte.
+ */
 export default function SuccessScreen({
   nombreMascota,
   email,

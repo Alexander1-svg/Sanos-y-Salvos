@@ -1,4 +1,10 @@
 {/* ── Footer ── */}
+/**
+ * Footer principal de la aplicación.
+ * Muestra información de contacto, redes sociales y copyright
+ * de la Fundación Sanos y Salvos.
+ * No recibe props.
+ */
 export default function Footer() {
   return (
       <footer id="contacto" className="bg-stone-900 text-stone-400 py-16">
