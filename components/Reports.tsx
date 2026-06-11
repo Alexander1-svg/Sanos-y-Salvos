@@ -12,7 +12,7 @@ const MapaPerdida = dynamic(() => import("@/components/MapaPerdida"), {
   ),
 });
 
-const API_MASCOTAS = "https://sanos-y-salvos-gestion-mascotas.onrender.com";
+const API_MASCOTAS = process.env.NEXT_PUBLIC_MS_GESTION;
 
 interface OwnerForm {
   nombreDueno: string;

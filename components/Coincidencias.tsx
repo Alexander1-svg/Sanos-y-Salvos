@@ -9,11 +9,9 @@
 import React, { useEffect, useState } from "react";
 
 // ─── Configuración de URLs ────────────────────────────────────────────────────
-const API_COINCIDENCIAS =
-  process.env.NEXT_PUBLIC_API_COINCIDENCIAS ||
-  "https://sanos-y-salvos-motor-coincidencias.onrender.com";
+const API_COINCIDENCIAS = process.env.NEXT_PUBLIC_MS_MOTOR;
 
-// ─── Tipos ────────────────────────────────────────────────────────────────────
+
 interface DetalleScore {
   especie: number;
   distancia: number;
