@@ -1,6 +1,6 @@
 # 🐾 Sanos y Salvos 🐾
 
-Este es el repositorio del **Frontend** de la plataforma "Sanos y Salvos", desarrollado con **Next.js**. El sistema permite reportar mascotas perdidas y facilitar su reencuentro a través de una red de microservicios.
+Este es el **Monorepositorio** oficial de la plataforma "Sanos y Salvos". El sistema centraliza el Frontend (Next.js) y el ecosistema de Microservicios (Node.js) diseñados para reportar mascotas perdidas y facilitar su reencuentro de forma automatizada.
 
 ---
 
@@ -9,7 +9,7 @@ El sistema se basa en un patrón de Microservicios, lo que permite que cada mód
 
 ### Patrón implementado:
 - **Arquitectura de Microservicios:** Cada funcionalidad crítica del sistema reside en un servicio independiente, lo que permite escalabilidad y fallos aislados.
-
+- **Patrón BFF (Backend For Frontend):** Implementado para optimizar las peticiones desde el cliente, reduciendo la latencia y centralizando la comunicación hacia las APIs del backend.
 ---
 
 ## Estrategia de Desarrollo y Arquetipos
@@ -22,16 +22,13 @@ El sistema se basa en un patrón de Microservicios, lo que permite que cada mód
 ---
 
 ## Configuración de Variables de Entorno
-Cree un archivo `.env.local` en la raíz del proyecto:
+Cree un archivo `.env` en la raíz del proyecto:
 
 ```env
 NEXT_PUBLIC_MS_GESTION=https://sanos-y-salvos-gestion-mascotas.onrender.com
 NEXT_PUBLIC_MS_GEO=https://sanos-y-salvos-geolocalizacion.onrender.com
 NEXT_PUBLIC_MS_MOTOR=https://sanos-y-salvos-motor-coincidencias.onrender.com
 ```
-
-> ⚠️ El microservicio de motor de coincidencias (`NEXT_PUBLIC_MS_MOTOR`) está pendiente de integrar en el frontend.
----
 
 ## Estructura del Repositorio
 - `/app`: Páginas y rutas del Frontend (Next.js)
@@ -94,9 +91,13 @@ Las pruebas se ejecutan con Vitest y cubren los componentes del Frontend. Para c
 npx vitest
 ```
 
+O con un desglose detallado: 
+
+```bash
+npm test -- --reporter=verbose
+```
+
 Los componentes testeados son:
-- `Navbar`
-- `Footer`
-- `Reports` (formulario de reporte)
-- `SuccessScreen`
-- `MapaPerdida`
+- `Reports` (formulario de reporte y filtros por tipo)
+- `MapaPerdida` (Coordenadas y estado del mapa)
+- `MatchMascotas` (Compatibilidad y distancia perimetral)
