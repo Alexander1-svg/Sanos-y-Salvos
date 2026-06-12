@@ -161,4 +161,5 @@ export default function MapaPerdida({ onUbicacionSeleccionada }: Props) {
       )}
     </div>
   );
+  //V2
 }
