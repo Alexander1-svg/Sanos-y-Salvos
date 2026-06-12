@@ -73,7 +73,10 @@ NEXT_PUBLIC_MS_MOTOR=https://sanos-y-salvos-motor-coincidencias.onrender.com
 ```bash
 npm install
 ```
-
+## 2.1 Dependecia extra StoryBook
+```bash
+npx storybook@latest init
+```
 ### 3. Levantar infraestructura (Backend & DB)
 ```bash
 docker compose up -d --build
@@ -95,6 +98,20 @@ O con un desglose detallado:
 
 ```bash
 npm test -- --reporter=verbose
+```
+
+### 6. Uso Storybook
+```bash
+npm run storybook
+```
+Configuración en caso de que no salgan los componentes:
+en el archivo ..\storybook\main.ts cambiar las stories a:
+```bash
+"stories": [
+  "../stories/**/*.mdx",
+  "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+  "../components/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+],
 ```
 
 Los componentes testeados son:
