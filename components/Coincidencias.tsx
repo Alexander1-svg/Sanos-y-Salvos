@@ -7,6 +7,16 @@
  */
 
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const MapaPerdida = dynamic(() => import("@/components/MapaPerdida"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-72 rounded-2xl bg-stone-100 animate-pulse flex items-center justify-center text-stone-400 text-sm">
+      🗺️ Cargando mapa…
+    </div>
+  ),
+});
 
 // ─── Configuración de URL ────────────────────────────────────────────────────
 const API_COINCIDENCIAS = process.env.NEXT_PUBLIC_MS_MOTOR;
@@ -349,10 +359,10 @@ function FormularioAvistamiento({ onSuccess }: { onSuccess: () => void }) {
             onChange={handleChange} className={inputCls} />
         </div>
 
-        {/* Ubicación */}
-        <div className="flex flex-col gap-1.5">
+        {/* Ubicación con Mapa */}
+        <div className="md:col-span-2 flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wide text-stone-600">
-            Ubicación <span className="text-emerald-500">*</span>
+            Ubicación del avistamiento <span className="text-emerald-500">*</span>
           </label>
           <button
             type="button"
@@ -362,6 +372,15 @@ function FormularioAvistamiento({ onSuccess }: { onSuccess: () => void }) {
           >
             {ubicandose ? "📡 Obteniendo ubicación…" : "📍 Usar mi ubicación actual"}
           </button>
+          
+          <MapaPerdida onUbicacionSeleccionada={(coords, direccion) => {
+            setForm((p) => ({
+              ...p,
+              coordenadas: coords,
+              lugarAvistamiento: direccion,
+            }));
+          }} />
+          
           {form.lugarAvistamiento && (
             <p className="text-xs text-stone-500 truncate">✅ {form.lugarAvistamiento}</p>
           )}
