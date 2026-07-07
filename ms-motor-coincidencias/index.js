@@ -232,9 +232,24 @@ function calcularScore(reporte, avistamiento) {
 }
 
 // ─── Middlewares de validación ───────────────────────────────────────────────
-function validarObjectId(req, res, next) {
+/**
+ * Valida que req.params.reporteId sea un ObjectId válido de MongoDB.
+ * Usado en la ruta GET /coincidencias/:reporteId
+ */
+function validarReporteId(req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.reporteId)) {
+    return res.status(400).json({ error: 'ID de reporte inválido.' });
+  }
+  next();
+}
+
+/**
+ * Valida que req.params.id sea un ObjectId válido de MongoDB.
+ * Usado en rutas como PATCH /avistamientos/:id/resuelto
+ */
+function validarAvistamientoId(req, res, next) {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    return res.status(400).json({ error: 'ID inválido.' });
+    return res.status(400).json({ error: 'ID de avistamiento inválido.' });
   }
   next();
 }
@@ -294,7 +309,7 @@ app.get('/avistamientos', async (req, res) => {
  * PATCH /avistamientos/:id/resuelto
  * Marca un avistamiento como resuelto (la mascota fue identificada/reunida).
  */
-app.patch('/avistamientos/:id/resuelto', validarObjectId, async (req, res) => {
+app.patch('/avistamientos/:id/resuelto', validarAvistamientoId, async (req, res) => {
   try {
     const avistamiento = await Avistamiento.findByIdAndUpdate(
       req.params.id,
@@ -320,7 +335,7 @@ app.patch('/avistamientos/:id/resuelto', validarObjectId, async (req, res) => {
  *   - limite:   número máximo de resultados (default: 10, max: 50)
  *   - radioKm:  solo considerar avistamientos dentro de N km (default: 15)
  */
-app.get('/coincidencias/:reporteId', validarObjectId, async (req, res) => {
+app.get('/coincidencias/:reporteId', validarReporteId, async (req, res) => {
   try {
     const minScore = parseInt(req.query.minScore) || 20;
     const limite   = Math.min(parseInt(req.query.limite) || 10, 50);
