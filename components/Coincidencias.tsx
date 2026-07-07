@@ -8,7 +8,7 @@
 
 import React, { useEffect, useState } from "react";
 
-// ─── Configuración de URLs ────────────────────────────────────────────────────
+// ─── Configuración de URL ────────────────────────────────────────────────────
 const API_COINCIDENCIAS = process.env.NEXT_PUBLIC_MS_MOTOR;
 
 
