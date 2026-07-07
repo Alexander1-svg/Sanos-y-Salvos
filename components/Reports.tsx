@@ -115,6 +115,10 @@ export default function ReportForm({ onSubmitted }: ReportFormProps) {
           ? { lat: petForm.coordenadas.lat, lng: petForm.coordenadas.lng }
           : undefined,
       };
+
+      console.log("📤 Enviando a:", `${API_MASCOTAS}/reportes`);  // ← AGREGA ESTO
+      console.log("🔧 API_MASCOTAS =", API_MASCOTAS);
+
       const res = await fetch(`${API_MASCOTAS}/reportes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -123,6 +127,9 @@ export default function ReportForm({ onSubmitted }: ReportFormProps) {
 
       // Parsear el body UNA sola vez — si se llama res.json() dos veces el body ya está consumido
       const data = await res.json();
+
+      console.log("📥 Respuesta del servidor:", data);            // ← Y ESTO
+      console.log("🆔 data._id =", data._id);   
 
       if (!res.ok) {
         throw new Error(data?.error || `Error ${res.status} al enviar el reporte`);
